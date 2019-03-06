@@ -1,0 +1,26 @@
+.alert-history-container {
+  .table {
+    margin: 30px auto;
+    width: 97%;
+    border-collapse: collapse;
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color: #4caf50;
+      color: white;
+      border: 1px solid #ddd;
+    }
+    tr {
+      td {
+        border: solid 1px #ddd;
+      }
+    }
+  }
+  .tittle {
+    display: flex;
+    justify-content: center;
+  }
+  hr {
+    margin: 30px;
+  }
+}

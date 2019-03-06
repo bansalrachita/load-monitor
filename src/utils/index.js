@@ -1,5 +1,4 @@
-import {getLoadData} from "./getLoadData";
+import getLoadData from './getLoadData';
+import getAlertData from './getAlertData';
 
-export {
-    getLoadData
-}
+export { getLoadData, getAlertData };

@@ -1,7 +1,3 @@
-import AlertBox from "./AlertBox";
-import AlertHistory from "./AlertHistory";
+import Alerts from './Alerts';
 
-export {
-    AlertHistory,
-    AlertBox
-}
+export default Alerts;

@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { Monitor, Alerts } from './components';
 import './App.scss';
-import {MonitorView} from "./components";
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <MonitorView/>
-            </div>
-        );
-    }
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Monitor />
+      <Alerts />
+    </div>
+  );
+};
 
 export default App;

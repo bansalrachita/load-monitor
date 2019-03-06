@@ -1,5 +1,4 @@
-import MonitorView from './monitoring/MonitorView';
+import Monitor from './monitoring';
+import Alerts from './alerts';
 
-export {
-    MonitorView
-}
+export { Monitor, Alerts };
