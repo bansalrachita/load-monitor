@@ -1,68 +1,78 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Libraries
 
-In the project directory, you can run:
+In this project, I've used react, redux and react-router JS libraries for building the Calendar app.<br>
 
-### `npm start`
+Helper libraries were used as under -
+
+- [create-react-app](https://github.com/facebook/create-react-app) for creating the framework template code.
+- [Moment.js](https://momentjs.com/) for all date related calculations.
+- [Prettier](https://prettier.io/) as code formatter
+- [CSS Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox)
+  for styling the components.
+
+## Setup
+
+Project can be cloned or downloaded [here](https://app.greenhouse.io/tests/f4da24f07c28ecb783371506cc415ece).<br>
+
+A set of data from is placed in the
+project as a file named as events.json
+I've added some dummy data to it to better visualize the UI.
+This data is also used to test the application.
+
+###Pre-requisites
+
+- node
+- npm
+- GNU make (if running using makefile)
+
+###Scripts
+
+####1. Makefile
+In the project directory, you can run:<br>
+
+#####`make`
+
+There's a Makefile included in this project at the top of the repository. The
+Makefile is very simple and has a default target to install the npm dependencies and start the server in development mode.
+
+There are additional targets as under which are self-explanatory.
+`make help` , `make clean`, `make install` and `make run`.
+
+####2. npm scripts
+
+The project can also be run using the package.json scripts.
+In the project directory, you can run:<br>
+
+##### `npm start`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br>
+You will also see any lint errors in the console if running in the development mode.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The server is running at [http://localhost:8080](http://localhost:8080)<br>
+Open the server [http://localhost:8080/api](http://localhost:8080/api) to view the data.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+##### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The static files under build folder can be served using server.js.
 
-### `npm run eject`
+####Testing
+Tests are written for the alerting login using the unit test libraries Mocha and chai.
+The test implementation can be found under './tests/project/service/monitoring.service.test.js'
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To run the tests execute the command below,
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#####`npm test-server`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+####Improvements
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Created push notification on alert generated.
+- Create Socket API to constantly push the stream of events when data is available.
+- Write the tests for client application.

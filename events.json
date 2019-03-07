@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "usage": 151,
+      "timestamp": "2019-03-06T22:02:07Z",
+      "alert": true
+    },
+    {
+      "usage": 153,
+      "timestamp": "2019-03-06T22:02:08Z",
+      "alert": false
+    },
+    {
+      "usage": 150,
+      "timestamp": "2019-03-06T22:02:09Z",
+      "alert": false
+    }
+  ]
+}

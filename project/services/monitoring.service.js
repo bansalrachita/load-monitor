@@ -7,29 +7,20 @@ const datastore = {
   alerts: [],
   alertState: false,
   start: false,
-  avgMinutes: 2000 * 60,
+  minAlertSeconds: 2000 * 60,
   timeBucket: 600000,
   interval: 10000
 };
 
 module.exports = function getLoad(app) {
-  // collect cpu data at an interval and duration.
-  function cpu(req, res) {
-    // const params = req.query;
-    res.json({ data: datastore.data });
-  }
-
   function getAlerts(req, res) {
-    // const params = req.query;
-    // const duration = params.duration ? params.duration : datastore.timeBucket;
-    // const currentTime = moment()
-    //   .utc()
-    //   .subtract(duration, 'seconds')
-    //   .format();
-    // console.log(currentTime);
-    // const alertSlice = datastore.alerts.filter(
-    //   alert => alert.timestamp > currentTime
-    // );
+    const duration = datastore.timeBucket;
+    const startTime = new Date();
+    const alertSlice = datastore.alerts.filter(alert => {
+      return Math.ceil(Math.abs(startTime - alert.timestamp)) < duration;
+    });
+
+    datastore.alerts = [...alertSlice];
     res.json({ data: datastore.alerts });
   }
 
@@ -48,21 +39,22 @@ module.exports = function getLoad(app) {
 
   function storeToAvgs(newAvg, interval) {
     datastore.avgs = [newAvg, ...datastore.avgs];
-    const storeLen = datastore.avgMinutes / interval;
-    if (storeLen < datastore.avgs.length) datastore.avgs.shift();
+    const alertTimeBucket = datastore.minAlertSeconds / interval;
+    if (alertTimeBucket < datastore.avgs.length) datastore.avgs.pop();
     const avg =
       datastore.avgs.reduce((x, y) => Number(y) + x, 0) / datastore.avgs.length;
-    return avg < newAvg && storeLen === datastore.avgs.length;
+    return (
+      avg <= newAvg && avg >= 100 && alertTimeBucket === datastore.avgs.length
+    );
   }
 
-  function storeToData(usage, timestamp, duration, interval) {
+  function createAlert(usage, timestamp, duration, interval) {
     const newAlert = storeToAvgs(usage, interval);
-    // console.log("alert: ", alert, alertState);
     if (newAlert) {
       const obj = {
-        message: `Entering alert state with ${usage.toFixed(
+        message: `High load generated an alert - load = ${usage.toFixed(
           2
-        )} utilization at ${moment(timestamp)
+        )} triggered at ${moment(timestamp)
           .utc()
           .format()}`,
         usage,
@@ -80,20 +72,25 @@ module.exports = function getLoad(app) {
       });
       datastore.alertState = !datastore.alertState;
     }
-    datastore.data = [...datastore.data, { usage, timestamp, alert: newAlert }];
+
+    return newAlert;
+  }
+
+  function storeToData(usage, timestamp, duration, interval) {
+    const alert = createAlert(usage, timestamp, duration, interval);
+    datastore.data = [...datastore.data, { usage, timestamp, alert }];
     // totalDuration  in seconds / intervals in seconds.
     if (duration / interval < datastore.data.length) {
       datastore.data.shift();
     }
-    // console.log(/*'data', data,*/ data.length);
   }
 
-  (function startCollection(
+  function startCollection(
     interval = datastore.interval,
     duration = datastore.timeBucket
   ) {
-    let startMeasures = null;
     if (!datastore.start) {
+      let startMeasures = delta();
       //  set initial state of data.
       datastore.data = new Array(duration / interval)
         .fill(0)
@@ -125,8 +122,22 @@ module.exports = function getLoad(app) {
       }, interval);
       datastore.start = !datastore.start;
     }
-  })();
+  }
+
+  // collect cpu data at an interval and duration.
+  function cpu(req, res) {
+    const params = req.query;
+    startCollection(params.interval, params.duration);
+    res.json({ data: datastore.data });
+  }
 
   app.get('/api/cpu', cpu);
   app.get('/api/alerts', getAlerts);
+
+  //  for testing purpose.
+  return {
+    datastore,
+    createAlert,
+    storeToAvgs
+  };
 };

@@ -3,17 +3,27 @@
     margin: 30px auto;
     width: 97%;
     border-collapse: collapse;
-    th {
+    .tbl-th {
       padding-top: 12px;
       padding-bottom: 12px;
       background-color: #4caf50;
       color: white;
       border: 1px solid #ddd;
     }
-    tr {
-      td {
+    .tbl-tr {
+      .tbl-td {
+        padding: 10px;
+        font-size: 0.8em;
+        color: #333333e8;
         border: solid 1px #ddd;
+        cursor: pointer;
       }
+    }
+    .alert-state {
+      background: rgba(139, 192, 239, 0.7294117647058823);
+      font-weight: 500;
+      transition-delay: 2s;
+      transition-duration: 3s;
     }
   }
   .tittle {

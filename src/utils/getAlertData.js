@@ -1,10 +1,10 @@
-const getAlertData = async setAlerts => {
+const getAlertData = async (setAlerts, setError) => {
   try {
     const response = await fetch('/api/alerts?duration=600000', {
       method: 'GET'
     });
     if (!response.ok) {
-      throw new Error('Error in receiving data from the server.');
+      setError('Error in receiving data from the server.');
     }
 
     const data = await response.json();
@@ -13,7 +13,7 @@ const getAlertData = async setAlerts => {
       setAlerts(data.data);
     }
   } catch (e) {
-    throw new Error(e.message);
+    setError(e.message);
   }
 };
 

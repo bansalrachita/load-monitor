@@ -12,6 +12,8 @@ const fetchLoad = () => {
     const duration = 10000;
     // set the data/error from the server.
     const getLoad = () => getLoadData(setData, setError);
+    // poll it on mount.
+    getLoad();
     // poll data every 5 seconds.
     const interval = setInterval(() => getLoad(), duration);
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 const Alert = ({ i, timestamp, usage, message }) => {
   const isAlertState = date => {
@@ -7,29 +8,22 @@ const Alert = ({ i, timestamp, usage, message }) => {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
     const diffSeconds = Math.ceil(timeDiff / 1000);
     // console.log('date1: ', date1, 'date2: ', date2, diffSeconds, timeDiff);
-    return diffSeconds < 15;
+    return diffSeconds < 40;
   };
 
   const initialAlertState = isAlertState(timestamp);
   const [alertState, setAlertState] = useState(initialAlertState);
 
   useEffect(() => {
-    if (alertState) {
-      const interval = setTimeout(() => {
-        setAlertState(isAlertState(timestamp));
-      }, 10000);
-
-      return () => clearInterval(interval);
-    }
-
-    return () => {};
+    const interval = setTimeout(() => setAlertState(false), 10000);
+    return () => clearInterval(interval);
   });
 
   return (
-    <tr key={i} style={alertState ? { background: '#aaa', color: 'red' } : {}}>
-      <td style={{ padding: 10 }}>{`${timestamp}`}</td>
-      <td style={{ padding: 10 }}>{`${usage}`}</td>
-      <td style={{ padding: 10 }}>{`${message}`}</td>
+    <tr key={i} className={`tbl-tr ${alertState ? 'alert-state' : ''}`}>
+      <td className="tbl-td">{`${moment(timestamp).format('lll')}`}</td>
+      <td className="tbl-td">{`${usage.toFixed(3)}`}</td>
+      <td className="tbl-td">{`${message}`}</td>
     </tr>
   );
 };

@@ -1,6 +1,6 @@
 const getLoadData = async (setData, setError) => {
   try {
-    const response = await fetch('/api/cpu', {
+    const response = await fetch('/api/cpu?duration=600000&interval=10000', {
       method: 'GET'
     });
     if (!response.ok) {

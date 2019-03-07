@@ -1,37 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import uuidV4 from 'uuid/v4';
+import moment from 'moment';
 import './alerts.scss';
-import { getAlertData } from '../../utils';
 import Alert from './Alert';
+import fetchAlerts from '../../hooks/fetchAlerts';
 
 const Alerts = () => {
-  const [alerts, setAlerts] = useState([]);
-  const duration = 10000;
-
-  useEffect(() => {
-    // poll data every 5 seconds.
-    const interval = setInterval(() => getAlertData(setAlerts), duration);
-    return () => clearInterval(interval);
-  });
+  const { alerts, error } = fetchAlerts();
 
   return (
     <div className="alert-history-container">
       <hr />
       <h3 className="tittle">Alert History</h3>
+      <p>{moment().format('LLL')}</p>
+      {error && <div>{error.message}</div>}
       <table className="table">
         <thead>
-          <tr>
-            <th scope="col" style={{ padding: 10 }}>
+          <tr className="tbl-tr">
+            <th scope="col" className="tbl-th">
               Date
             </th>
-            <th scope="col" style={{ padding: 10 }}>
+            <th scope="col" className="tbl-th">
               Usage
             </th>
-            <th scope="col" style={{ padding: 10 }}>
+            <th scope="col" className="tbl-th">
               Alert Message
             </th>
           </tr>
         </thead>
+        {!alerts.length && (
+          <tbody>
+            <tr>
+              <td />
+              <td>No data found...</td>
+            </tr>
+          </tbody>
+        )}
         <tbody>
           {alerts.map((tr, i) => {
             return <Alert key={`alert-${uuidV4()}`} {...tr} i={i} />;
