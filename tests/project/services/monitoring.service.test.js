@@ -22,6 +22,11 @@ describe('Alerting logic', function() {
   });
   // eslint-disable
   describe('Alert() function', function() {
+    it('Should verify initial state.', function() {
+      // console.log("monitoringService.datastore", monitoringService.datastore);
+      expect(0).to.equal(monitoringService.datastore.alerts.length);
+    });
+
     it('Should generate high load alert.', function() {
       const usage = 150;
       const timestamp = '2019-03-06T22:02:09Z';
