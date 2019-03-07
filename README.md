@@ -69,9 +69,9 @@ The test implementation can be found under './tests/project/service/monitoring.s
 
 To run the tests execute the command below,
 
-#####`npm test-server`
+##### `npm test-server`
 
-####Improvements
+#### Improvements
 
 - Created push notification on alert generated.
 - Create Socket API to constantly push the stream of events when data is available.
