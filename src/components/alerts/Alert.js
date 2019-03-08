@@ -7,7 +7,6 @@ const Alert = ({ i, timestamp, usage, message }) => {
     const date2 = new Date(date);
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
     const diffSeconds = Math.ceil(timeDiff / 1000);
-    // console.log('date1: ', date1, 'date2: ', date2, diffSeconds, timeDiff);
     return diffSeconds < 40;
   };
 
