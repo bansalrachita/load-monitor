@@ -1,10 +1,10 @@
 import React from 'react';
 import { Monitor, Alerts } from './components';
-import './App.scss';
+import './app.scss';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="app">
       <Monitor />
       <Alerts />
     </div>

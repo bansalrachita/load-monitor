@@ -1,8 +1,13 @@
 const getLoadData = async (setData, setError) => {
   try {
-    const response = await fetch('/api/cpu?duration=600000&interval=10000', {
-      method: 'GET'
-    });
+    const duration = '600000';
+    const interval = '10000';
+    const response = await fetch(
+      `/api/cpu?duration=${duration}&interval=${interval}`,
+      {
+        method: 'GET'
+      }
+    );
     if (!response.ok) {
       throw new Error('Error in receiving data from the server.');
     }

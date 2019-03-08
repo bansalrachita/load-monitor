@@ -11,7 +11,7 @@ const Alerts = () => {
   return (
     <div className="alert-history-container">
       <hr />
-      <h3 className="tittle">Alert History</h3>
+      <h3 className="title">Alert History</h3>
       <p>{moment().format('LLL')}</p>
       {error && <div>{error.message}</div>}
       <table className="table">
