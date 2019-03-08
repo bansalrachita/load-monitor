@@ -33,7 +33,9 @@ const Alerts = () => {
         {!alerts.length && (
           <tbody>
             <tr>
-              <td colSpan={3}>No data found...</td>
+              <td colSpan={3} className="no-data">
+                No data found...
+              </td>
             </tr>
           </tbody>
         )}

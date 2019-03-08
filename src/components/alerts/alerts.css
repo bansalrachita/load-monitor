@@ -1,0 +1,34 @@
+.alert-history-container .table {
+  margin: 30px auto;
+  width: 97%;
+  border-collapse: collapse;
+}
+.alert-history-container .table .tbl-th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #469047;
+  color: white;
+  border: 1px solid #ddd;
+}
+.alert-history-container .table .tbl-tr .tbl-td {
+  padding: 10px;
+  font-size: 0.8em;
+  color: #333333e8;
+  border: solid 1px #ddd;
+  cursor: pointer;
+}
+.alert-history-container .table .alert-state {
+  background: rgba(139, 192, 239, 0.729412);
+  font-weight: 500;
+  transition-delay: 2s;
+  transition-duration: 3s;
+}
+
+.alert-history-container .title {
+  display: flex;
+  justify-content: center;
+}
+
+.alert-history-container hr {
+  margin: 30px;
+}

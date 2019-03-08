@@ -47,8 +47,7 @@ const MonitorChart = ({ data }) => {
                 const alert = value.get('data').get('alert');
                 return {
                   normal: {
-                    fill: alert ? 'red' : 'green',
-                    opacity: 0.8
+                    fill: alert ? '#9E2B0E' : '#1D7324'
                   }
                 };
               }}

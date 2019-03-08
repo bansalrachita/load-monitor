@@ -6,7 +6,7 @@
     .tbl-th {
       padding-top: 12px;
       padding-bottom: 12px;
-      background-color: #469047;
+      background-color: #2965cc;
       color: white;
       border: 1px solid #ddd;
     }
@@ -24,6 +24,10 @@
       font-weight: 500;
       transition-delay: 2s;
       transition-duration: 3s;
+    }
+    .no-data {
+      font-weight: 500;
+      padding: 30px;
     }
   }
   .title {
