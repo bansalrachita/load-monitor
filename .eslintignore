@@ -1,1 +1,2 @@
 tests/project/services/*.js
+src/*.test.js
