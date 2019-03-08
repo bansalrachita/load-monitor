@@ -14,6 +14,13 @@ const datastore = {
 
 module.exports = function getLoad(app) {
   function getAlerts(req, res) {
+    const duration = datastore.timeBucket;
+    const startTime = new Date();
+    const alertSlice = datastore.alerts.filter(alert => {
+      return Math.ceil(Math.abs(startTime - alert.timestamp)) < duration;
+    });
+
+    datastore.alerts = [...alertSlice];
     res.json({ data: datastore.alerts });
   }
 

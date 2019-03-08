@@ -10,11 +10,11 @@ const Monitor = () => {
   const style = styler([
     {
       key: 'usage',
-      color: '#1D7324'
+      color: 'green'
     },
     {
       key: 'alert',
-      color: '#B85033'
+      color: 'red'
     }
   ]);
   const categories = [
