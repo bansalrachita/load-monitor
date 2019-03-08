@@ -1,9 +1,11 @@
 import React from 'react';
 import uuidV4 from 'uuid/v4';
 import moment from 'moment';
-import './alerts.scss';
+
 import Alert from './Alert';
-import fetchAlerts from '../../hooks/fetchAlerts';
+import { fetchAlerts } from '../../hooks';
+
+import './alerts.scss';
 
 const Alerts = () => {
   const { alerts, error } = fetchAlerts();
